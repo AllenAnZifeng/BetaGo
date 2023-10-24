@@ -247,7 +247,7 @@ def turn(state):
 
 
 def batch_turn(batch_state):
-    return np.max(batch_state[:, govars.TURN_CHNL], axis=(1, 2)).astype(np.int)
+    return np.max(batch_state[:, govars.TURN_CHNL], axis=(1, 2)).astype(np.int32)
 
 
 def liberties(state: np.ndarray):
@@ -280,7 +280,7 @@ def areas(state):
     all_pieces = np.sum(state[[govars.BLACK, govars.WHITE]], axis=0)
     empties = 1 - all_pieces
 
-    empty_labels, num_empty_areas = ndimage.measurements.label(empties)
+    empty_labels, num_empty_areas = ndimage.label(empties)
 
     black_area, white_area = np.sum(state[govars.BLACK]), np.sum(state[govars.WHITE])
     for label in range(1, num_empty_areas + 1):
@@ -388,8 +388,8 @@ def random_weighted_action(move_weights):
     Action is 1D
     Expected shape is (NUM OF MOVES, )
     """
-    move_weights = preprocessing.normalize(move_weights[np.newaxis], norm='l1')
-    return np.random.choice(np.arange(len(move_weights[0])), p=move_weights[0])
+    move_weights /= move_weights.sum()
+    return np.random.choice(np.arange(len(move_weights)), p=move_weights)
 
 
 def random_action(state):
