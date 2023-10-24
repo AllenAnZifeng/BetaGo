@@ -4,8 +4,9 @@ It is also optimized to be as efficient as possible in order to efficiently trai
 
 # Installation
 ```bash
-# In the root directory
-pip install -e .
+# Prerequisites
+brew install open-mpi
+pip install -r requirements.txt   # This contains `pip install -e .`
 ```
 
 # API
