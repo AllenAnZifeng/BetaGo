@@ -1,0 +1,10 @@
+cloudpickle==3.0.0
+gym==0.26.2
+-e git+https://github.com/AllenAnZifeng/BetaGo.git@3a3d97bea329ac263bd43990dce73dea8d57534b#egg=gym_go
+gym-notices==0.0.8
+joblib==1.3.2
+numpy==1.26.1
+pyglet==2.0.9
+scikit-learn==1.3.2
+scipy==1.11.3
+threadpoolctl==3.2.0
